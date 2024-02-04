@@ -1,6 +1,8 @@
-const blogData = require("../models/blog");
+
 const userModel = require("../models/userModels");
+
 const bcryptjs = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 async function handleSignUp(req, res) {
     try {
         const { firstName, lastName, email, password, phoneNumber } = req.body;
@@ -54,43 +56,9 @@ async function handleLogin(req, res) {
 
 
 
-async function handleBlognew(req, res) {
-    try {
-        const newblogUser = await blogData.create(req.body);
-        return res.status(201).json({ message: "New Blog Successfully created" });
-
-    }
-    catch (err) {
-        console.log(err);
-        res.status(500).json({ message: "Internal Server error" });
-    }
-}
-async function handleAllblogdata(req, res) {
-    try {
-        const blogalldata = await blogData.find();
-        return res.status(201).json(blogalldata);
-
-    }
-    catch (err) {
-        console.log(err);
-        res.status(500).json({ message: "Internal Server error" });
-    }
-}
-
-async function handleBlogbyid(req, res) {
-    try {
-        const blogId = req.params.blogId;
-        const blogbyid = await blogData.findById(blogId);
-        return res.status(201).json(blogbyid);
-
-    }
-    catch (err) {
-        console.log(err);
-        res.status(500).json({ message: "Internal Server error" });
-    }
-}
 
 
-module.exports = { handleSignUp, handleLogin, handleBlognew, handleAllblogdata, handleBlogbyid };
+
+module.exports = { handleSignUp, handleLogin };
 
 

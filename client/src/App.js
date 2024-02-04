@@ -1,14 +1,17 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from './home';
-import Login from './login';
-import Signup from './signUp';
-import Newblog from './newblog';
+import Home from './pages/home';
+import Login from './pages/login';
+import Signup from './pages/signUp';
+import Newblog from './pages/newblog';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Blogbyid from './blogbyid';
+import Blogs from './pages/blogs';
+import Editblog from './pages/editblog';
+import Header from './components/Header';
+import Myblog from './pages/myblog';
 
 function App() {
     return (
@@ -16,12 +19,19 @@ function App() {
 
             <BrowserRouter>
                 <ToastContainer position="top-right" />
+                <Header />
                 <Routes>
                     <Route path='/home' element={<Home />} />
                     <Route path='/signup' element={<Signup />} />
                     <Route path='/login' element={<Login />} />
-                    <Route path='/newblog' element={<Newblog />} />
-                    <Route path='/home/:id' element={<Blogbyid />} />
+                    <Route path='/myblog' element={<Myblog />} />
+
+                    <Route path='/new' element={<Newblog />} />
+                    <Route path='/read/:id' element={<Blogs />} />
+                    <Route path='/edit/:id' element={<Editblog />} />
+
+
+
 
                 </Routes>
 

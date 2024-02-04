@@ -1,5 +1,6 @@
 const express = require("express")
-const authRoute = require("./routes/authRoute")
+const userRoutes = require("../server/routes/userRoutes")
+const blogRoutes = require("../server/routes/blogRoutes")
 const cors = require("cors")
 
 const mongoose = require("mongoose");
@@ -16,7 +17,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/users").then(() =>
 
 app.use(express.json());
 
-app.use("/", authRoute)
+app.use("/user", userRoutes)
+app.use("/blog", blogRoutes)
 
 
 

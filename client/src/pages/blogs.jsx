@@ -3,13 +3,13 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Blogbyid = () => {
+const Blogs = () => {
   const { id } = useParams();
   const [data, setData] = useState();
   console.log(id);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/blogbyid/" + id)
+      .get("http://localhost:8000/blog/" + id)
       .then((res) => {
         console.log(res.data.title);
         setData(res.data);
@@ -34,4 +34,4 @@ const Blogbyid = () => {
   );
 };
 
-export default Blogbyid;
+export default Blogs;

@@ -1,9 +1,9 @@
 const { Schema, model } = require("mongoose")
 userblogSchema = new Schema({
 
-    title: { type: String, require: true, trim: true },
-    body: { type: String, require: true, trim: true },
-    author: { type: String, require: true, trim: true },
+    title: { type: String, required: true, trim: true },
+    body: { type: String, required: true, trim: true },
+    authorId: { type: Schema.Types.ObjectId, required: true, ref: "users" },
 
 
 }, { timestamps: true })

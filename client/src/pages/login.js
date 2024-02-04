@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,32 +6,31 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
 const Login = () => {
-    const [email, setemail] = useState("");
-    const [password, setpassword] = useState("")
-
-
-
     const navigate = useNavigate();
+
+
+    const [email, setemail] = useState("");
+    const [password, setpassword] = useState("");
+    useEffect(() => {
+        if (localStorage.getItem("userId")) {
+            navigate("/home")
+        }
+    }, [navigate])
 
     const handleLogin = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8000/login", {
-
-
-            email,
-            password,
-        }).then((res) => {
-            toast.success("user login successful")
-
-            const data = res.data;
-            navigate("/home", { state: { data } })
-        })
+        axios.post("http://localhost:8000/user/login", { email, password })
+            .then((res) => {
+                toast.success("User login successfully ")
+                localStorage.setItem("userId", res.data.userId);
+                console.log(res.data.userId);
+                navigate("/home")
+            })
             .catch(error => {
-                console.log(error)
+                console.error("Error submitting form:", error);
                 toast.error(error.response.data.message);
 
-
-            })
+            });
     }
 
     return (

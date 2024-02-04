@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
@@ -10,14 +10,17 @@ const Signup = () => {
     const [password, setpassword] = useState("");
     const [phoneNumber, setphoneNumber] = useState("");
 
-
-
-
-
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.getItem("userId")) {
+            navigate("/home")
+        }
+    }, [navigate])
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8000/signup", {
+        axios.post("http://localhost:8000/user/signup", {
             firstName,
             lastName,
             email,
